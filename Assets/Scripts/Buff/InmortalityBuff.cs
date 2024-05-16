@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class InmortalityBuff : MonoBehaviour
 {
-    private float duration; // Duración del buff en segundos
-    private bool active; // Indica si el buff está activo
+    private float duration;
+    private bool active;
 
     public InmortalityBuff(float duration)
     {
@@ -17,13 +17,12 @@ public class InmortalityBuff : MonoBehaviour
     {
         active = true;
         // Aplicar efectos visuales o sonoros para indicar que el jugador es inmortal
-        // Por ejemplo, cambiar el color del jugador a uno brillante
     }
 
     public void DeactivateBuff()
     {
         active = false;
-        // Revertir los efectos visuales o sonoros aplicados al activar el buff
+        // Revertir los efectos visuales aplicados al activar el buff
     }
 
     public bool IsActive()

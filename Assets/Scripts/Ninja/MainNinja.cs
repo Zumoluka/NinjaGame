@@ -8,10 +8,14 @@ public class MainNinja : MonoBehaviour
 
     private int health;
     private InmortalityBuff immortalityBuff;
-
+    private float speed;
+    private int coinCount = 0;
+    private int damage = 25;
+    private HUDManager hudManager;
     private void Start()
     {
-        immortalityBuff = new InmortalityBuff(10f); 
+        immortalityBuff = new InmortalityBuff(10f);
+        hudManager = FindObjectOfType<HUDManager>();
     }
 
     public void GetImmortalityBuff()
@@ -29,7 +33,7 @@ public class MainNinja : MonoBehaviour
         set { health = value; }
     }
 
-    private float speed;
+    
     public float Speed
     {
         get { return speed; }
@@ -48,5 +52,19 @@ public class MainNinja : MonoBehaviour
     private void Die()
     {
         SceneManager.LoadScene(1);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        DestructibleCube destructible = collision.gameObject.GetComponent<DestructibleCube>();
+        if (destructible != null)
+        {
+            destructible.TakeDamage(damage);
+        }
+    }
+    public void AddCoins(int amount)
+    {
+        coinCount += amount;
+        hudManager.SetPoints(coinCount);
+        Debug.Log("Coins: " + coinCount);
     }
 }
