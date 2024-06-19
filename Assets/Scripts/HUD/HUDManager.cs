@@ -48,4 +48,60 @@ public class HUDManager : MonoBehaviour
         int seconds = Mathf.FloorToInt(elapsedTime % 60);
         timeText.text = string.Format("Time: {0:00}:{1:00}", minutes, seconds);
     }
+    private void OnEnable()
+    {
+        Enemy.OnEnemyDefeated += UpdateScore;
+        MainNinja.OnNinjaJump += ShowJumpMessage;
+        MainNinja.OnNinjaAttack += ShowAttackMessage;
+        MainNinja.OnNinjaHurt += ShowHurtMessage;
+        GameController.OnGameStarted += ShowGameStartMessage;
+        GameController.OnLevelCompleted += ShowLevelCompletedMessage;
+        GameController.OnGamePaused += ShowPauseMessage;
+    }
+
+    private void OnDisable()
+    {
+        Enemy.OnEnemyDefeated -= UpdateScore;
+        MainNinja.OnNinjaJump -= ShowJumpMessage;
+        MainNinja.OnNinjaAttack -= ShowAttackMessage;
+        MainNinja.OnNinjaHurt -= ShowHurtMessage;
+        GameController.OnGameStarted -= ShowGameStartMessage;
+        GameController.OnLevelCompleted -= ShowLevelCompletedMessage;
+        GameController.OnGamePaused -= ShowPauseMessage;
+    }
+
+    private void UpdateScore()
+    {
+        Debug.Log("Score updated!");
+    }
+
+    private void ShowJumpMessage()
+    {
+        Debug.Log("Ninja jumped!");
+    }
+
+    private void ShowAttackMessage()
+    {
+        Debug.Log("Ninja attacked!");
+    }
+
+    private void ShowHurtMessage()
+    {
+        Debug.Log("Ninja hurt!");
+    }
+
+    private void ShowGameStartMessage()
+    {
+        Debug.Log("Game started!");
+    }
+
+    private void ShowLevelCompletedMessage()
+    {
+        Debug.Log("Level completed!");
+    }
+
+    private void ShowPauseMessage()
+    {
+        Debug.Log("Game paused!");
+    }
 }

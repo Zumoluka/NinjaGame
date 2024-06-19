@@ -1,8 +1,9 @@
+using Items;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPotion : MonoBehaviour
+public class HealthPotion : MonoBehaviour, IUsable
 {
     public int healAmount = 25;
     private HUDManager hudManager;
@@ -19,6 +20,12 @@ public class HealthPotion : MonoBehaviour
         }
     }
 
+    public void Use()
+    {
+        Debug.Log("Health potion used!");
+        // Añadir lógica para incrementar la salud del jugador, etc.
+        Destroy(gameObject);
+    }
     private void UsePotion()
     {
         GameObject player = GameObject.FindWithTag("Player");

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class MainNinja : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class MainNinja : MonoBehaviour
     private int coinCount = 0;
     private int damage = 25;
     private HUDManager hudManager;
+
+    public static event Action OnNinjaJump;
+    public static event Action OnNinjaAttack;
+    public static event Action OnNinjaHurt;
     private void Start()
     {
         immortalityBuff = new InmortalityBuff(10f);
@@ -66,5 +71,23 @@ public class MainNinja : MonoBehaviour
         coinCount += amount;
         hudManager.SetPoints(coinCount);
         Debug.Log("Coins: " + coinCount);
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) 
+        {
+            Debug.Log("Ninja Jumped!");
+            OnNinjaJump?.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            Debug.Log("Ninja Hurt");
+            OnNinjaHurt?.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Debug.Log("Ninja Attacked!");
+            OnNinjaAttack?.Invoke();
+        }
     }
 }
