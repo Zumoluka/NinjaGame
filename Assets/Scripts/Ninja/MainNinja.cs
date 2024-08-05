@@ -13,7 +13,9 @@ public class MainNinja : MonoBehaviour
     private int coinCount = 0;
     private int damage = 25;
     private HUDManager hudManager;
+    public float moveSpeed = 5f;
 
+    private Vector2 movement;
     public static event Action OnNinjaJump;
     public static event Action OnNinjaAttack;
     public static event Action OnNinjaHurt;
@@ -74,11 +76,10 @@ public class MainNinja : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) 
-        {
-            Debug.Log("Ninja Jumped!");
-            OnNinjaJump?.Invoke();
-        }
+        movement.x = Input.GetAxis("Horizontal");
+        movement.y = Input.GetAxis("Vertical");
+
+
         if (Input.GetKeyDown(KeyCode.O))
         {
             Debug.Log("Ninja Hurt");
@@ -89,5 +90,11 @@ public class MainNinja : MonoBehaviour
             Debug.Log("Ninja Attacked!");
             OnNinjaAttack?.Invoke();
         }
+    }
+    void FixedUpdate()
+    {
+        // Convierte el input en movimiento en el mundo isométrico
+        Vector3 move = new Vector3(movement.x, movement.y, 0);
+        transform.position += move * moveSpeed * Time.deltaTime;
     }
 }
