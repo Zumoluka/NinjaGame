@@ -79,10 +79,9 @@ public class MainNinja : MonoBehaviour
         movement.x = Input.GetAxis("Horizontal");
         movement.y = Input.GetAxis("Vertical");
 
-
         if (Input.GetKeyDown(KeyCode.O))
         {
-            Debug.Log("Ninja Hurt");
+            Debug.Log("Ninja HEALTH");
             OnNinjaHurt?.Invoke();
         }
         if (Input.GetKeyDown(KeyCode.C))
